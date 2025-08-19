@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>New Trade</h2>
+<form method="POST" enctype="multipart/form-data">
+  {{ form.hidden_tag() }}
+  <div class="mb-3">{{ form.symbol.label }} {{ form.symbol(class="form-control") }}</div>
+  <div class="mb-3">{{ form.direction.label }} {{ form.direction(class="form-select") }}</div>
+  <div class="mb-3">{{ form.entry_price.label }} {{ form.entry_price(class="form-control") }}</div>
+  <div class="mb-3">{{ form.qty.label }} {{ form.qty(class="form-control") }}</div>
+  <div class="mb-3">{{ form.exit_price.label }} {{ form.exit_price(class="form-control") }}</div>
+  <div class="mb-3">{{ form.screenshot.label }} {{ form.screenshot(class="form-control") }}</div>
+  {{ form.submit(class="btn btn-success") }}
+</form>
+{% endblock %}

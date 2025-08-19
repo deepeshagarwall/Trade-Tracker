@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+<h1>Welcome to Trade Tracker</h1>
+<p class="text-muted">Recent trades</p>
+<ul class="list-group">
+{% for trade in trades %}
+  <li class="list-group-item">
+    {{ trade.symbol }} - {{ trade.direction }} @ {{ trade.entry_price }}
+  </li>
+{% else %}
+  <li class="list-group-item">No trades yet.</li>
+{% endfor %}
+</ul>
+<canvas id="pnlChart" height="100"></canvas>
+{% endblock %}

@@ -1,0 +1,24 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Trades</h2>
+<table class="table table-striped">
+<thead>
+<tr><th>ID</th><th>Symbol</th><th>Direction</th><th>Qty</th><th>Status</th><th>PNL</th><th></th></tr>
+</thead>
+<tbody>
+{% for trade in trades %}
+<tr>
+  <td>{{ trade.id }}</td>
+  <td>{{ trade.symbol }}</td>
+  <td>{{ trade.direction }}</td>
+  <td>{{ trade.qty }}</td>
+  <td>{{ trade.status }}</td>
+  <td>{% if trade.pnl() %}{{ trade.pnl() }}{% endif %}</td>
+  <td><a href="{{ url_for('trades.trade_detail', trade_id=trade.id) }}" class="btn btn-sm btn-primary">View</a></td>
+</tr>
+{% else %}
+<tr><td colspan="7">No trades found.</td></tr>
+{% endfor %}
+</tbody>
+</table>
+{% endblock %}

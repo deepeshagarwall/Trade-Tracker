@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+{% block content %}
+<h2>Trade #{{ trade.id }} - {{ trade.symbol }}</h2>
+<ul class="list-group mb-3">
+  <li class="list-group-item">Direction: {{ trade.direction }}</li>
+  <li class="list-group-item">Entry Price: {{ trade.entry_price }}</li>
+  <li class="list-group-item">Exit Price: {{ trade.exit_price or 'N/A' }}</li>
+  <li class="list-group-item">Quantity: {{ trade.qty }}</li>
+  <li class="list-group-item">Status: {{ trade.status }}</li>
+  <li class="list-group-item">PNL: {{ trade.pnl() or 'N/A' }}</li>
+</ul>
+{% if trade.screenshot %}
+  <img src="{{ url_for('static', filename='uploads/' ~ trade.screenshot) }}" class="img-fluid">
+{% endif %}
+<form method="POST" action="{{ url_for('trades.delete_trade', trade_id=trade.id) }}">
+  <button class="btn btn-danger" type="submit">Delete</button>
+</form>
+{% endblock %}
