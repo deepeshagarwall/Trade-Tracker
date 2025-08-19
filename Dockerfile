@@ -6,15 +6,11 @@ WORKDIR /app
 COPY requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-# Copy the application
+# Copy the application code
 COPY . .
 
-# Set environment variables
-ENV FLASK_APP=main.py
-ENV FLASK_ENV=production
+# Cloud Run expects the service to listen on $PORT (default 8080)
+EXPOSE 8080
 
-# Expose the port the app runs on
-EXPOSE 5000
-
-# Command to run the application
-CMD ["flask", "run", "--host=0.0.0.0"]
+# Run Gunicorn and point it to "app" inside wsgi.py
+CMD exec gunicorn --bind :$PORT --workers 2 wsgi:app
